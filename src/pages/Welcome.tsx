@@ -12,6 +12,13 @@ export function Welcome(){
 		setVisible(true)
 	}
 
+	/*
+		Anotações: 
+		{'\n'} é usado para  pular linha dentro do texto, já que a tag <br> não funciona
+		Tem um arquivo chamado colors em /src/styles/colors.ts que é responsável por ter todas as cores do projeto. Ao ser importado é só usar colors.nomeDaCor que ele já funciona
+		Criei um arquivo na raiz com o nome custom.d.ts que é um arquivo de configurações onde ele para dar dar erro em todas as imagens ".png"
+	*/
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>

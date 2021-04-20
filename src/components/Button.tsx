@@ -2,6 +2,12 @@ import React from 'react';
 import { StyleSheet, Text,  TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import colors from '../styles/colors';
 
+	/*
+		Anotações:
+		Ao definir propriedades para o botão (ex: titulo dele), eu preciso dizer qual é o tipo de informação que virá através do componente, nesse caso, string
+		Eu consigo as propriedades do TouchableOpacity importando também o TouchableOpacityProps com o react-native
+	*/
+
 interface ButtonProps extends TouchableOpacityProps {
 	title: string;
 }
