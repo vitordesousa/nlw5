@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, View, Text, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { Button } from '../components/Button';
@@ -26,6 +27,14 @@ export function UserIdentification() {
 		setIsFilled(!!value);
 		setName(value);
 	}
+
+	
+	const navigation = useNavigation();
+
+	function handleSubmit(){
+		navigation.navigate('Confirmation')
+	}
+
 	
 	return (
 		<SafeAreaView style={styles.container}> 
@@ -48,7 +57,7 @@ export function UserIdentification() {
 						]}  placeholder="Digite seu nome" onBlur={handleInputBlur} onFocus={handleInputFocus} onChangeText={handleInputChange} />
 
 						<View style={styles.footer}>
-							<Button title="Confirmar" />
+							<Button title="Confirmar"  onPress={handleSubmit} />
 						</View>
 						
 					</View>

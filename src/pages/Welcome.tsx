@@ -5,6 +5,7 @@ import fonts from '../styles/fonts'; // Tem um arquivo chamado fonts em /src/sty
 import {Feather} from '@expo/vector-icons'
 
 import wateringImg from '../assets/watering.png'
+import { useNavigation } from '@react-navigation/core';
 
 export function Welcome(){
 	/*
@@ -13,6 +14,15 @@ export function Welcome(){
 		Criei um arquivo na raiz com o nome custom.d.ts que é um arquivo de configurações onde ele para dar dar erro em todas as imagens ".png"
 		SafeAreaView serve para que todos os elementos estejam dentro da área de visualização, e não talvez dentro da tabbar, ou de algum botão físico, ou do fone do celular
 	*/
+
+	const navigation = useNavigation();
+
+	function handleStart(){
+		navigation.navigate('UserIdentification')
+	}
+
+
+
 	return (
 		<SafeAreaView style={styles.container}> 
 			<View  style={styles.wrapper}>
@@ -29,7 +39,7 @@ export function Welcome(){
 					Nós cuidamos de lembrar você sempre que precisar.
 				</Text>
 
-				<TouchableOpacity style={styles.button} activeOpacity={0.7}>
+				<TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={handleStart}>
 					<Feather name="chevron-right"  style={styles.buttonIcon} />
 				</TouchableOpacity>
 			</View>
