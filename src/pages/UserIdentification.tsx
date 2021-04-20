@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, View, Text, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
-/* Anotações:
-KeyboardAvoidingView Serve para quando o usuário apertar para digitar o texto no campo, o botão de confirmar não ficar oculto na tela
-
-*/
+	/* Anotações:
+	KeyboardAvoidingView Serve para quando o usuário apertar para digitar o texto no campo, o botão de confirmar não ficar oculto na tela
+	*/
 
 export function UserIdentification() {
+
+	const [ isFocused, setIsFocused ] = useState(false);
+	const [ isFilled, setIsFilled ] = useState(false);
+	const [ name, setName ] = useState<string>(); // definido como string, porque como nos "useState" de cima estão com valor padrão false, ele já entende que é bool
+
+	function handleInputBlur(){
+		setIsFocused(false);
+		setIsFilled(!!name);
+	}	
+	function handleInputFocus(){
+		setIsFocused(true);
+	}
+
+	function handleInputChange(value: string){
+		setIsFilled(!!value);
+		setName(value);
+	}
+	
 	return (
 		<SafeAreaView style={styles.container}> 
 			<KeyboardAvoidingView style={styles.container} behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
@@ -17,7 +34,7 @@ export function UserIdentification() {
 					<View style={styles.form}>
 						<View style={styles.header}>
 							<Text style={styles.emoji}>
-								😄 
+								{ isFilled ? '😄' : '😁' } 
 							</Text>
 							<Text style={styles.title}>
 								Como podemos{'\n'}
@@ -25,7 +42,10 @@ export function UserIdentification() {
 							</Text>
 						</View>
 
-						<TextInput style={styles.input}  placeholder="Digite seu nome" />
+						<TextInput style={[
+							styles.input,
+							(isFocused || isFilled) && { borderColor: colors.green}
+						]}  placeholder="Digite seu nome" onBlur={handleInputBlur} onFocus={handleInputFocus} onChangeText={handleInputChange} />
 
 						<View style={styles.footer}>
 							<Button title="Confirmar" />
