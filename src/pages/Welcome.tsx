@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import colors from '../styles/colors';
 
 import wateringImg from '../assets/watering.png'
 import { Button } from '../components/Button';
 
 export function Welcome(){
-	const [visible, setVisible] = useState(false);
-
-	function handleVisible(){
-		setVisible(true)
-	}
 
 	/*
 		Anotações: 
@@ -34,7 +29,11 @@ export function Welcome(){
 				Nós cuidamos de lembrar você sempre que precisar.
 			</Text>
 
-			<Button title=">"  />
+			<TouchableOpacity style={styles.button} activeOpacity={0.7}>
+				<Text style={styles.buttonText}>
+					>
+				</Text>
+			</TouchableOpacity>
 		</SafeAreaView>
 	)
 }
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 	},
 	title: {
 		fontSize : 32,
@@ -62,4 +61,17 @@ const styles = StyleSheet.create({
 		paddingHorizontal : 20,
 		color: colors.heading,
 	},
+	
+	button: {
+		alignItems: 'center',
+		backgroundColor : colors.green,
+		borderRadius : 16,
+		height : 56,
+		width : 56,
+		justifyContent : 'center',
+		marginBottom : 10,
+	},
+	buttonText : {
+		color: '#FFFFFF'
+	}
 });
