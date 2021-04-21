@@ -1,15 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import colors from '../styles/colors';
 
 import { Header } from '../components/Header';
-import fonts from '../styles/fonts';
 import { EnviromentButton } from '../components/EnviromentButton';
+
+import colors from '../styles/colors';
+import fonts from '../styles/fonts';
+import api from '../services/api';
+
+
 /* 
 	Anotações: 
 	FlatList serve para fazer uma listagem através de um array (ou json, acredito eu). É como fazer um for/foreach, mas tem algumas opções interessantes
+	useEffect com async await serve para quando a rota for iniciada, ele consumir a api e aguardar até os dados necessários serem carregados.
 */
+
+interface EnviromentProps {
+	key: string,
+	title: string
+}
+
 export function PlantSelect(){
+
+	const [enviroments, setEnviroments ] = useState<EnviromentProps[]>([]);
+
+	useEffect(() => {
+		async function fetchEnviroment(){
+			const { data } = await api.get('plants_environments');
+			setEnviroments([
+				{
+					key: 'all',
+					title: "Todos"
+				},
+				... data
+			]);
+		}
+
+		fetchEnviroment();
+	}, [])
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -21,8 +50,8 @@ export function PlantSelect(){
 			</View>
 			
 			<View>
-				<FlatList data={[1, 2, 3, 4, 5, 6, 7, 8]} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.enviromentList} renderItem={(item) => (
-					<EnviromentButton title="Cozinha" active />
+				<FlatList data={enviroments} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.enviromentList} renderItem={({ item }) => (
+					<EnviromentButton title={item.title} />
 				)} />
 			</View>
 		</View>
