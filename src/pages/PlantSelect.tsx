@@ -7,6 +7,7 @@ import { EnviromentButton } from '../components/EnviromentButton';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import api from '../services/api';
+import { PlantCardPrimary } from '../components/PlantCardPrimary';
 
 
 /* 
@@ -20,9 +21,23 @@ interface EnviromentProps {
 	title: string
 }
 
+interface PlantProps {
+	id: string;
+	name: string;
+	about: string;
+	water_tips : string;
+	photo : string;
+	environments : [string];
+	frequency : {
+		times : number;
+		repeat_every : string;
+	}
+}
+
 export function PlantSelect(){
 
 	const [enviroments, setEnviroments ] = useState<EnviromentProps[]>([]);
+	const [plants, setPlants ] = useState<PlantProps[]>([]);
 
 	useEffect(() => {
 		async function fetchEnviroment(){
@@ -39,6 +54,15 @@ export function PlantSelect(){
 		fetchEnviroment();
 	}, [])
 
+	useEffect(() => {
+		async function fetchPlants(){
+			const { data } = await api.get('plants');
+			setPlants( data );
+		}
+
+		fetchPlants();
+	}, [])
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -52,6 +76,12 @@ export function PlantSelect(){
 			<View>
 				<FlatList data={enviroments} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.enviromentList} renderItem={({ item }) => (
 					<EnviromentButton title={item.title} />
+				)} />
+			</View>
+
+			<View style={styles.plants}>
+				<FlatList data={plants} contentContainerStyle={styles.plantsList} showsVerticalScrollIndicator={false} numColumns={2} renderItem={({ item }) => (
+					<PlantCardPrimary data={item} />
 				)} />
 			</View>
 		</View>
@@ -85,5 +115,13 @@ const styles = StyleSheet.create({
 		marginLeft: 32,
 		marginVertical: 32,
 		paddingBottom: 5,
+	},
+	plants : {
+		flex: 1,
+		paddingHorizontal: 32,
+		justifyContent : 'center'
+	},
+	plantsList :{
+
 	}
 })
