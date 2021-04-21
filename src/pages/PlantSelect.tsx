@@ -4,6 +4,7 @@ import colors from '../styles/colors';
 
 import { Header } from '../components/Header';
 import fonts from '../styles/fonts';
+import { EnviromentButton } from '../components/EnviromentButton';
 
 export function PlantSelect(){
 	return (
@@ -14,6 +15,9 @@ export function PlantSelect(){
 
 				<Text style={styles.title}>Em qual ambiente</Text>
 				<Text style={styles.subtitle}>você quer colocar sua planta?</Text>
+				
+				<EnviromentButton title="Cozinha" active />
+
 			</View>
 		</View>
 	);
