@@ -122,6 +122,5 @@ const styles = StyleSheet.create({
 		justifyContent : 'center'
 	},
 	plantsList :{
-
 	}
 })
