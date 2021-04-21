@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colors from '../styles/colors';
 
+import { Header } from '../components/Header';
 
 export function PlantSelect(){
 	return (
 		<View style={styles.container}>
-			<Text>Selecione uma planta</Text>
+			<Header />
 		</View>
 	);
 }
