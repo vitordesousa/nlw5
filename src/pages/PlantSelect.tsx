@@ -8,7 +8,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import api from '../services/api';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
-
+import { Load } from '../components/Load';
 
 /* 
 	Anotações: 
@@ -35,6 +35,8 @@ interface PlantProps {
 }
 
 export function PlantSelect(){
+
+	const [ loading, setLoading ] = useState( true);
 
 	const [enviroments, setEnviroments ] = useState<EnviromentProps[]>([]);
 	const [ plants, setPlants ] = useState<PlantProps[]>([]);
@@ -72,10 +74,17 @@ export function PlantSelect(){
 		async function fetchPlants(){
 			const { data } = await api.get('plants?_sort=name&_order=asc');
 			setPlants( data );
+			setFilteredPlants(data);
+			setLoading(false);
 		}
 
 		fetchPlants();
 	}, [])
+
+
+	if(loading){
+		return <Load />
+	}
 
 	return (
 		<View style={styles.container}>
