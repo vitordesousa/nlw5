@@ -139,7 +139,7 @@ export function PlantSelect(){
 								handleFetchMore(distanceFromEnd);
 							}}
 							ListFooterComponent={
-								loadingMore ?  <ActivityIndicator color={colors.green} /> : <></>
+								loadingMore ?  <ActivityIndicator color={colors.green} /> : <Text style={{ textAlign: 'center'}}> Não há mais itens para carregar </Text>
 							}
 							renderItem={({ item }) => (
 
