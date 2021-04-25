@@ -9,6 +9,7 @@ import fonts from '../styles/fonts';
 import api from '../services/api';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
 import { Load } from '../components/Load';
+import { useNavigation } from '@react-navigation/core';
 
 /* 
 	Anotações: 
@@ -45,6 +46,8 @@ export function PlantSelect(){
 
 	const [ page, setPage] = useState(1);
 	const [ loadingMore, setLoadingMore ] = useState(true);
+
+	const navigation = useNavigation();
 
 	function handleEnviromentSelected(environment: string){
 		SetEnviromentSelected(environment);
@@ -107,6 +110,11 @@ export function PlantSelect(){
 	}, [])
 
 
+	function handPlantSelect(plant: PlantProps){
+		navigation.navigate('PlantSave');
+	}
+
+
 	if(loading){
 		return <Load />
 	}
@@ -143,7 +151,7 @@ export function PlantSelect(){
 							}
 							renderItem={({ item }) => (
 
-					<PlantCardPrimary data={item} />
+					<PlantCardPrimary data={item} onPress={() => handPlantSelect(item)} />
 				)} />
 			</View>
 		</View>
