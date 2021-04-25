@@ -4,6 +4,7 @@ import { StyleSheet, SafeAreaView, View, Text, TextInput, KeyboardAvoidingView, 
 import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 	/* Anotações:
 	KeyboardAvoidingView Serve para quando o usuário apertar para digitar o texto no campo, o botão de confirmar não ficar oculto na tela
@@ -32,11 +33,16 @@ export function UserIdentification() {
 	
 	const navigation = useNavigation();
 
-	function handleSubmit(){
+	// foi colocada a função como async por causa do AsyncStorage que ele precisa aguardar até que o AsyncStorage salve o nome do usuário para que então possa continuar 
+	async function handleSubmit(){
 
 		if(!name){ // valida se o usuário digitou o nome
 			return Alert.alert('Me diz como chamar você ... 😥');
 		}
+		/* 
+			colocar o @nomeDoApp:user para que fique mais padronizado em questão de o async storage não sobrepor caso tenha uma chave igual em outro app
+		*/
+		await AsyncStorage.setItem('@plantManager:user', name);
 
 		navigation.navigate('Confirmation')
 	}
