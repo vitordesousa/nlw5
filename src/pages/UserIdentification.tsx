@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
@@ -33,6 +33,11 @@ export function UserIdentification() {
 	const navigation = useNavigation();
 
 	function handleSubmit(){
+
+		if(!name){ // valida se o usuário digitou o nome
+			return Alert.alert('Me diz como chamar você ... 😥');
+		}
+
 		navigation.navigate('Confirmation')
 	}
 
