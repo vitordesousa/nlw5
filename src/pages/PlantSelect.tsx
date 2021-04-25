@@ -111,7 +111,7 @@ export function PlantSelect(){
 
 
 	function handPlantSelect(plant: PlantProps){
-		navigation.navigate('PlantSave');
+		navigation.navigate('PlantSave', { plant}); // enviando para a pagina da planta e também enviando as informações da planta selecionada
 	}
 
 
