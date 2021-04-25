@@ -42,7 +42,7 @@ export function UserIdentification() {
 		/* 
 			colocar o @nomeDoApp:user para que fique mais padronizado em questão de o async storage não sobrepor caso tenha uma chave igual em outro app
 		*/
-		await AsyncStorage.setItem('@plantManager:user', name);
+		await AsyncStorage.setItem('@plantmanager:user', name);
 
 		navigation.navigate('Confirmation')
 	}
