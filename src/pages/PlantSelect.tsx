@@ -123,7 +123,7 @@ export function PlantSelect(){
 			</View>
 			
 			<View>
-				<FlatList data={enviroments} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.enviromentList} renderItem={({ item }) => (
+				<FlatList data={enviroments} keyExtractor={(item) => String(item.key) } horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.enviromentList} renderItem={({ item }) => (
 					<EnviromentButton title={item.title} active={item.key === enviromentSelected} onPress={ () => handleEnviromentSelected(item.key)} />
 				)} />
 			</View>
@@ -131,6 +131,7 @@ export function PlantSelect(){
 			<View style={styles.plants}>
 				<FlatList 
 							data={filteredPlants} 
+							keyExtractor={(item) => String(item.id) } 
 							contentContainerStyle={styles.plantsList} 
 							showsVerticalScrollIndicator={false} 
 							numColumns={2} 
