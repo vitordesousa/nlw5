@@ -26,6 +26,8 @@ export function PlantSave(){
 	const [selectedDateTime, setSelectedDateTime] = useState(new Date());
 	const [showDatePicker, setShowDatePicker] = useState(Platform.OS == 'ios')
 
+	const navigation = useNavigation()
+
 	function handleChangeTime(event : Event, dateTime : Date | undefined){
 		if(Platform.OS == 'android'){
 			setShowDatePicker(oldState => !oldState);
@@ -57,6 +59,14 @@ export function PlantSave(){
 				... plant,
 				dateTimeNotification : selectedDateTime
 			})
+
+			navigation.navigate('Confirmation', {
+				title : 'Tudo certo',
+				subtitle: `Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.`,
+				buttonTitle : 'Muito obrigado! :)',
+				icon : 'hug',
+				nextScreen : 'MyPlants'
+			})	
 		} catch(error) {
 			Alert.alert("Não foi possível salvar a planta 😥.");
 		}
