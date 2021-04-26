@@ -74,7 +74,7 @@ export function PlantSave(){
 
 				{showDatePicker && (<DateTimePicker value={selectedDateTime} mode="time" display="spinner" onChange={handleChangeTime} />)}
 
-				<Button title="Cadastrar Plantar" onPress={() => {}} />
+				<Button title="Cadastrar Planta" onPress={() => {}} />
 			</View>
 		</View>
 	)
