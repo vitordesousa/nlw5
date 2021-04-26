@@ -11,7 +11,7 @@ import fonts from '../styles/fonts';
 
 import { useNavigation, useRoute } from '@react-navigation/core';
 import { format, isBefore } from 'date-fns';
-import { PlantProps } from '../libs/storage';
+import { loadPlant, PlantProps, savePlant } from '../libs/storage';
 
 interface Params {	
 	plant: PlantProps
@@ -45,6 +45,23 @@ export function PlantSave(){
 		setShowDatePicker(oldState => !oldState);
 	}
 
+
+	
+	async function handleSave(){
+
+		/* const data = await loadPlant();
+		console.log(data); */
+
+		try {
+			await savePlant({
+				... plant,
+				dateTimeNotification : selectedDateTime
+			})
+		} catch(error) {
+			Alert.alert("Não foi possível salvar a planta 😥.");
+		}
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.plantInfo}>
@@ -74,7 +91,7 @@ export function PlantSave(){
 
 				{showDatePicker && (<DateTimePicker value={selectedDateTime} mode="time" display="spinner" onChange={handleChangeTime} />)}
 
-				<Button title="Cadastrar Planta" onPress={() => {}} />
+				<Button title="Cadastrar Planta" onPress={ handleSave } />
 			</View>
 		</View>
 	)
